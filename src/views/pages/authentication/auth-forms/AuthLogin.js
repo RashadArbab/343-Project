@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -34,6 +34,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
+import { ErrorSharp } from '@mui/icons-material';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -43,7 +44,7 @@ const FirebaseLogin = ({ ...others }) => {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const customization = useSelector((state) => state.customization);
     const [checked, setChecked] = useState(true);
-
+    const navigate = useNavigate();
     const googleHandler = async () => {
         console.error('Login');
     };
@@ -55,6 +56,12 @@ const FirebaseLogin = ({ ...others }) => {
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
+    };
+
+    const signInFunc = (errors) => {
+        if (Object.keys(errors).length === 0) {
+            navigate('/');
+        }
     };
 
     return (
@@ -120,7 +127,7 @@ const FirebaseLogin = ({ ...others }) => {
 
             <Formik
                 initialValues={{
-                    email: 'info@codedthemes.com',
+                    email: 'email343@email.com',
                     password: '123456',
                     submit: null
                 }}
@@ -145,7 +152,7 @@ const FirebaseLogin = ({ ...others }) => {
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
-                    <form noValidate onSubmit={handleSubmit} {...others}>
+                    <form false onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
                             <InputLabel htmlFor="outlined-adornment-email-login">Email Address / Username</InputLabel>
                             <OutlinedInput
@@ -225,7 +232,9 @@ const FirebaseLogin = ({ ...others }) => {
                         <Box sx={{ mt: 2 }}>
                             <AnimateButton>
                                 <Button
-                                    disableElevation
+                                    onClick={() => {
+                                        signInFunc(errors);
+                                    }}
                                     disabled={isSubmitting}
                                     fullWidth
                                     size="large"
