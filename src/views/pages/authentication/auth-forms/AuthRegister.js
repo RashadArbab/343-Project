@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 // material-ui
@@ -70,6 +70,15 @@ const FirebaseRegister = ({ ...others }) => {
     useEffect(() => {
         changePassword('123456');
     }, []);
+
+    const signUpFunc = (errors) => {
+        console.log('running sign up');
+        if (Object.keys(errors).length === 0) {
+            navigate('/pages/skills-competency');
+        }
+    };
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -291,6 +300,9 @@ const FirebaseRegister = ({ ...others }) => {
                                     type="submit"
                                     variant="contained"
                                     color="secondary"
+                                    onClick={() => {
+                                        signUpFunc(errors);
+                                    }}
                                 >
                                     Sign up
                                 </Button>
