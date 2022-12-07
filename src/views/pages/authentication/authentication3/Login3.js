@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Stack, Typography, useMediaQuery } from '@mui/material';
@@ -17,7 +17,7 @@ import Logo from 'ui-component/Logo';
 const Login = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-
+    const customization = useSelector((state) => state.customization);
     return (
         <AuthWrapper1>
             <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
@@ -44,13 +44,21 @@ const Login = () => {
                                                         color={theme.palette.secondary.main}
                                                         gutterBottom
                                                         variant={matchDownSM ? 'h3' : 'h2'}
+                                                        sx={{
+                                                            fontSize: `${customization.fontSize}px`,
+                                                            borderRadius: `${customization.borderRadius}px`
+                                                        }}
                                                     >
                                                         Hi, Welcome Back
                                                     </Typography>
                                                     <Typography
                                                         variant="caption"
-                                                        fontSize="16px"
                                                         textAlign={matchDownSM ? 'center' : 'inherit'}
+                                                        color="grey.700"
+                                                        sx={{
+                                                            fontSize: `${customization.fontSizeSmall}px`,
+                                                            borderRadius: `${customization.borderRadius}px`
+                                                        }}
                                                     >
                                                         Enter your credentials to continue
                                                     </Typography>
@@ -62,7 +70,7 @@ const Login = () => {
                                         <AuthLogin />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Divider />
+                                        <Divider sx={{ backgroundColor: `${theme.palette.grey[500]}!important` }} />
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Grid item container direction="column" alignItems="center" xs={12}>
@@ -70,7 +78,11 @@ const Login = () => {
                                                 component={Link}
                                                 to="/pages/register/register3"
                                                 variant="subtitle1"
-                                                sx={{ textDecoration: 'none' }}
+                                                sx={{
+                                                    textDecoration: 'none',
+                                                    fontSize: `${customization.fontSizeSmall}px`,
+                                                    borderRadius: `${customization.borderRadius}px`
+                                                }}
                                             >
                                                 Don&apos;t have an account?
                                             </Typography>

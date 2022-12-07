@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import AccessibilityRoundedIcon from '@mui/icons-material/AccessibilityRounded';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -24,7 +24,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 // project imports
 import SubCard from 'ui-component/cards/SubCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import { SET_BORDER_RADIUS, SET_FONT_FAMILY } from 'store/actions';
+import { SET_BORDER_RADIUS, SET_FONT_FAMILY, SET_FONT_SIZE, SET_FONT_SIZE_SMALL } from 'store/actions';
 import { gridSpacing } from 'store/constant';
 
 // concat 'px'
@@ -46,14 +46,21 @@ const Customization = () => {
     };
 
     // state - border radius
-    const [borderRadius, setBorderRadius] = useState(customization.borderRadius);
-    const handleBorderRadius = (event, newValue) => {
-        setBorderRadius(newValue);
+    const [fontSize, setFontSize] = useState(customization.fontSize);
+    const [fontSizeSmall, setFontSizeSmall] = useState(customization.fontSizeSmall);
+    const handleFontSize = (event, newValue) => {
+        setFontSize(newValue);
+        if (newValue - 10 < 10) {
+            setFontSizeSmall(11);
+        } else {
+            setFontSizeSmall(newValue - 10);
+        }
     };
 
     useEffect(() => {
-        dispatch({ type: SET_BORDER_RADIUS, borderRadius });
-    }, [dispatch, borderRadius]);
+        dispatch({ type: SET_FONT_SIZE, fontSize });
+        dispatch({ type: SET_FONT_SIZE_SMALL, fontSizeSmall });
+    }, [dispatch, fontSize]);
 
     let initialFont;
     switch (customization.fontFamily) {
@@ -91,7 +98,7 @@ const Customization = () => {
     return (
         <>
             {/* toggle button */}
-            <Tooltip title="Live Customize">
+            <Tooltip arrow title="Accessibility Settings">
                 <Fab
                     component="div"
                     onClick={handleToggle}
@@ -110,9 +117,9 @@ const Customization = () => {
                         zIndex: theme.zIndex.speedDial
                     }}
                 >
-                    <AnimateButton type="rotate">
+                    <AnimateButton type="">
                         <IconButton color="inherit" size="large" disableRipple>
-                            <IconSettings />
+                            <AccessibilityRoundedIcon />
                         </IconButton>
                     </AnimateButton>
                 </Fab>
@@ -173,36 +180,37 @@ const Customization = () => {
                         </Grid>
                         <Grid item xs={12}>
                             {/* border radius */}
-                            <SubCard title="Border Radius">
+                            <SubCard title="Font Size">
                                 <Grid item xs={12} container spacing={2} alignItems="center" sx={{ mt: 2.5 }}>
                                     <Grid item>
-                                        <Typography variant="h6" color="secondary">
-                                            4px
+                                        <Typography fontSize={'12px'} variant="h6" color="secondary">
+                                            12px
                                         </Typography>
                                     </Grid>
                                     <Grid item xs>
                                         <Slider
                                             size="small"
-                                            value={borderRadius}
-                                            onChange={handleBorderRadius}
+                                            value={fontSize}
+                                            onChange={handleFontSize}
                                             getAriaValueText={valueText}
                                             valueLabelDisplay="on"
                                             aria-labelledby="discrete-slider-small-steps"
                                             marks
                                             step={2}
-                                            min={4}
-                                            max={24}
+                                            min={12}
+                                            max={30}
                                             color="secondary"
                                             sx={{
                                                 '& .MuiSlider-valueLabel': {
-                                                    color: 'secondary.light'
+                                                    color: '#FFFFFF',
+                                                    fontSize: fontSize
                                                 }
                                             }}
                                         />
                                     </Grid>
                                     <Grid item>
-                                        <Typography variant="h6" color="secondary">
-                                            24px
+                                        <Typography fontSize={'30px'} variant="h6" color="secondary">
+                                            30px
                                         </Typography>
                                     </Grid>
                                 </Grid>

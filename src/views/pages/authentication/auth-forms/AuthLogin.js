@@ -35,6 +35,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
 import { ErrorSharp } from '@mui/icons-material';
+import { fontWeight } from '@mui/system';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -60,7 +61,7 @@ const FirebaseLogin = ({ ...others }) => {
 
     const signInFunc = (errors) => {
         if (Object.keys(errors).length === 0) {
-            navigate('/');
+            navigate('/pages/skills-competency');
         }
     };
 
@@ -77,14 +78,22 @@ const FirebaseLogin = ({ ...others }) => {
                             variant="outlined"
                             sx={{
                                 color: 'grey.700',
-                                backgroundColor: theme.palette.grey[50],
-                                borderColor: theme.palette.grey[100]
+                                backgroundColor: theme.palette.grey[200],
+                                borderColor: theme.palette.grey[200]
                             }}
                         >
                             <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>
-                                <img src={Google} alt="google" width={16} height={16} style={{ marginRight: matchDownSM ? 8 : 16 }} />
+                                <img
+                                    src={Google}
+                                    alt="google"
+                                    width={`${customization.fontSizeSmall}`}
+                                    height={`${customization.fontSizeSmall}`}
+                                    style={{ marginRight: matchDownSM ? 8 : 16 }}
+                                />
                             </Box>
-                            Sign in with Google
+                            <Typography sx={{ fontSize: `${customization.fontSize}px`, fontFamily: `${customization.fontFamily}` }}>
+                                Sign in with Google
+                            </Typography>
                         </Button>
                     </AnimateButton>
                 </Grid>
@@ -95,7 +104,7 @@ const FirebaseLogin = ({ ...others }) => {
                             display: 'flex'
                         }}
                     >
-                        <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
+                        <Divider sx={{ flexGrow: 1, backgroundColor: `${theme.palette.grey[500]}!important` }} orientation="horizontal" />
 
                         <Button
                             variant="outlined"
@@ -104,9 +113,11 @@ const FirebaseLogin = ({ ...others }) => {
                                 m: 2,
                                 py: 0.5,
                                 px: 7,
-                                borderColor: `${theme.palette.grey[100]} !important`,
-                                color: `${theme.palette.grey[900]}!important`,
+                                borderColor: `${theme.palette.grey[50]} !important`,
+                                color: `${theme.palette.grey[500]}!important`,
                                 fontWeight: 500,
+                                fontSize: `${customization.fontSize}px`,
+                                fontFamily: `${customization.fontFamily}`,
                                 borderRadius: `${customization.borderRadius}px`
                             }}
                             disableRipple
@@ -115,12 +126,14 @@ const FirebaseLogin = ({ ...others }) => {
                             OR
                         </Button>
 
-                        <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
+                        <Divider sx={{ flexGrow: 1, backgroundColor: `${theme.palette.grey[500]}!important` }} orientation="horizontal" />
                     </Box>
                 </Grid>
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
                     <Box sx={{ mb: 2 }}>
-                        <Typography variant="subtitle1">Sign in with Email address</Typography>
+                        <Typography sx={{ fontSize: `${customization.fontSize}px`, fontFamily: `${customization.fontFamily}` }}>
+                            Sign in with Email address
+                        </Typography>
                     </Box>
                 </Grid>
             </Grid>
@@ -154,7 +167,12 @@ const FirebaseLogin = ({ ...others }) => {
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                     <form false onSubmit={handleSubmit} {...others}>
                         <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
-                            <InputLabel htmlFor="outlined-adornment-email-login">Email Address / Username</InputLabel>
+                            <InputLabel
+                                htmlFor="outlined-adornment-email-login"
+                                sx={{ fontSize: `${customization.fontSize - 10}px`, fontWeight: `${customization.fontWeight}` }}
+                            >
+                                Email Address / Username
+                            </InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-email-login"
                                 type="email"
@@ -164,6 +182,7 @@ const FirebaseLogin = ({ ...others }) => {
                                 onChange={handleChange}
                                 label="Email Address / Username"
                                 inputProps={{}}
+                                sx={{ fontSize: `${customization.fontSize}px` }}
                             />
                             {touched.email && errors.email && (
                                 <FormHelperText error id="standard-weight-helper-text-email-login">
@@ -177,13 +196,19 @@ const FirebaseLogin = ({ ...others }) => {
                             error={Boolean(touched.password && errors.password)}
                             sx={{ ...theme.typography.customInput }}
                         >
-                            <InputLabel htmlFor="outlined-adornment-password-login">Password</InputLabel>
+                            <InputLabel
+                                sx={{ fontSize: `${customization.fontSize - 10}px`, fontWeight: `${customization.fontWeight}` }}
+                                htmlFor="outlined-adornment-password-login"
+                            >
+                                Password
+                            </InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password-login"
                                 type={showPassword ? 'text' : 'password'}
                                 value={values.password}
                                 name="password"
                                 onBlur={handleBlur}
+                                sx={{ fontSize: `${customization.fontSize}px`, fontWeight: `${customization.fontWeight}` }}
                                 onChange={handleChange}
                                 endAdornment={
                                     <InputAdornment position="end">
@@ -214,12 +239,41 @@ const FirebaseLogin = ({ ...others }) => {
                                         checked={checked}
                                         onChange={(event) => setChecked(event.target.checked)}
                                         name="checked"
-                                        color="primary"
+                                        sx={{
+                                            fontSize: `${customization.fontSizeSmall}px`,
+                                            fontWeight: `${customization.fontWeight}`,
+                                            fontFamily: `${customization.fontFamily}`,
+                                            color: '#004569',
+                                            '&.Mui-checked': {
+                                                color: '#00669a'
+                                            }
+                                        }}
                                     />
                                 }
-                                label="Remember me"
+                                label={
+                                    <Typography
+                                        sx={{
+                                            color: 'grey.700',
+                                            fontSize: `${customization.fontSizeSmall}px`,
+                                            fontWeight: `${customization.fontWeight}`,
+                                            fontFamily: `${customization.fontFamily}`
+                                        }}
+                                    >
+                                        Remember Me
+                                    </Typography>
+                                }
                             />
-                            <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
+                            <Typography
+                                // variant="subtitle1"
+                                color="secondary"
+                                sx={{
+                                    fontSize: `${customization.fontSizeSmall}px`,
+                                    fontWeight: `${customization.fontWeight}`,
+                                    fontFamily: `${customization.fontFamily}`,
+                                    textDecoration: 'none',
+                                    cursor: 'pointer'
+                                }}
+                            >
                                 Forgot Password?
                             </Typography>
                         </Stack>
@@ -241,6 +295,11 @@ const FirebaseLogin = ({ ...others }) => {
                                     type="submit"
                                     variant="contained"
                                     color="secondary"
+                                    sx={{
+                                        fontSize: `${customization.fontSize}px`,
+                                        fontWeight: `${customization.fontWeight}`,
+                                        fontFamily: `${customization.fontFamily}`
+                                    }}
                                 >
                                     Sign in
                                 </Button>

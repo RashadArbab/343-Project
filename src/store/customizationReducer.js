@@ -37,6 +37,16 @@ const customizationReducer = (state = initialState, action) => {
                 ...state,
                 borderRadius: action.borderRadius
             };
+        case actionTypes.SET_FONT_SIZE:
+            return {
+                ...state,
+                fontSize: action.fontSize
+            };
+        case actionTypes.SET_FONT_SIZE_SMALL:
+            return {
+                ...state,
+                fontSizeSmall: action.fontSizeSmall
+            };
         default:
             return state;
     }
