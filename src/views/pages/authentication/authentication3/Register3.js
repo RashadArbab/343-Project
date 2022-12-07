@@ -51,6 +51,7 @@ const Register = () => {
                                                         variant="caption"
                                                         fontSize="16px"
                                                         textAlign={matchDownSM ? 'center' : 'inherit'}
+                                                        color="grey.700"
                                                     >
                                                         Enter your credentials to continue
                                                     </Typography>

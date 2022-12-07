@@ -92,8 +92,8 @@ const FirebaseRegister = ({ ...others }) => {
                             size="large"
                             sx={{
                                 color: 'grey.700',
-                                backgroundColor: theme.palette.grey[50],
-                                borderColor: theme.palette.grey[100]
+                                backgroundColor: theme.palette.grey[200],
+                                borderColor: theme.palette.grey[200]
                             }}
                         >
                             <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>
@@ -105,7 +105,7 @@ const FirebaseRegister = ({ ...others }) => {
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{ alignItems: 'center', display: 'flex' }}>
-                        <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
+                        <Divider sx={{ flexGrow: 1, backgroundColor: `${theme.palette.grey[500]}!important` }} orientation="horizontal" />
                         <Button
                             variant="outlined"
                             sx={{
@@ -113,8 +113,8 @@ const FirebaseRegister = ({ ...others }) => {
                                 m: 2,
                                 py: 0.5,
                                 px: 7,
-                                borderColor: `${theme.palette.grey[100]} !important`,
-                                color: `${theme.palette.grey[900]}!important`,
+                                borderColor: `${theme.palette.grey[50]} !important`,
+                                color: `${theme.palette.grey[500]}!important`,
                                 fontWeight: 500,
                                 borderRadius: `${customization.borderRadius}px`
                             }}
@@ -123,7 +123,7 @@ const FirebaseRegister = ({ ...others }) => {
                         >
                             OR
                         </Button>
-                        <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />
+                        <Divider sx={{ flexGrow: 1, backgroundColor: `${theme.palette.grey[500]}!important` }} orientation="horizontal" />
                     </Box>
                 </Grid>
                 <Grid item xs={12} container alignItems="center" justifyContent="center">
@@ -270,7 +270,12 @@ const FirebaseRegister = ({ ...others }) => {
                                             checked={checked}
                                             onChange={(event) => setChecked(event.target.checked)}
                                             name="checked"
-                                            color="primary"
+                                            sx={{
+                                                color: '#004569',
+                                                '&.Mui-checked': {
+                                                    color: '#00669a'
+                                                }
+                                            }}
                                         />
                                     }
                                     label={
